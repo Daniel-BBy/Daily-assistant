@@ -85,7 +85,7 @@ jobs:
             echo "news.json 没有变化，跳过提交"
             exit 0
           fi
-          git commit -m "news: $(date -u +%F)"
+          git commit -m "news: $(TZ=Asia/Shanghai date +%F)"
           git push || (git pull --rebase --autostash && git push)
 
   deploy:
