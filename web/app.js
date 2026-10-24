@@ -57,6 +57,9 @@ async function main() {
 
   render()
 
+  // 新闻是独立的：抓不到就整块不显示，绝不阻塞课程和天气
+  loadNews()
+
   // 天气单独拉：失败只影响天气卡片，不影响课程
   try {
     state.weather = normalize(await fetchForecast(state.cfg.place))
@@ -198,6 +201,58 @@ function renderWeather(isToday) {
 function renderFooter() {
   const t = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
   $('updated').textContent = `更新于 ${t} · 天气 Open-Meteo · 官方预警未接入`
+}
+
+/** 分类配色：和 CSS 里的 --c 变量配合，避免每个分类写一套 class。 */
+const CAT_COLORS = {
+  融资收购: '#f59e0b',
+  产品发布: '#22d3ee',
+  政策监管: '#fb7185',
+  开源: '#34d399',
+  研究: '#a78bfa',
+  具身智能: '#60a5fa',
+  行业: '#94a3b8',
+}
+
+async function loadNews() {
+  let data
+  try {
+    const r = await fetch('data/news.json', { cache: 'no-cache' })
+    if (!r.ok) return
+    data = await r.json()
+  } catch {
+    return // 没有新闻数据时什么都不显示，不影响课程和天气
+  }
+  renderNews(data)
+}
+
+function renderNews(data) {
+  const items = Array.isArray(data?.items) ? data.items : []
+  if (items.length === 0) return
+
+  $('news-date').textContent = String(data.date ?? '').replace(/-/g, '.')
+
+  $('news-list').innerHTML = items.map((n, i) => {
+    const color = CAT_COLORS[n.category] ?? CAT_COLORS.行业
+    return `
+      <li class="news-item">
+        <span class="news-idx">${String(i + 1).padStart(2, '0')}</span>
+        <div class="news-body">
+          <div class="news-meta">
+            <span class="news-cat" style="--c:${color}">${esc(n.category)}</span>
+            <span class="news-src">${esc(n.source)}</span>
+          </div>
+          <a class="news-h" href="${esc(n.url)}" target="_blank" rel="noopener noreferrer nofollow">${esc(n.title)}</a>
+          <p class="news-p">${esc(n.summary)}</p>
+        </div>
+      </li>`
+  }).join('')
+
+  const t = data.generatedAt
+    ? new Date(data.generatedAt).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour: '2-digit', minute: '2-digit' })
+    : ''
+  $('news-foot').textContent = `内容来自各媒体 · 版权归原作者${t ? ` · 生成于 ${t}` : ''}`
+  $('news-panel').hidden = false
 }
 
 main()

@@ -21,11 +21,12 @@ const WEB = join(ROOT, 'web')
 /** 浏览器可直接加载的模块（无 node: 内置依赖）。 */
 const LIBRARY = ['courses.js', 'openmeteo.js', 'risks.js', 'render.js']
 
-/** 页面要 fetch 的数据文件。 */
+/** 页面要 fetch 的数据文件。news.json 是可选的：没生成就跳过。 */
 const DATA = [
   ['data/term.json', 'term.json'],
   ['data/brief.config.json', 'brief.config.json'],
   ['course_schedule.csv', 'course_schedule.csv'],
+  ['data/news.json', 'news.json', true],
 ]
 
 async function main() {
@@ -35,8 +36,13 @@ async function main() {
   for (const name of LIBRARY) {
     await copyFile(join(ROOT, 'scripts', name), join(WEB, 'lib', name))
   }
-  for (const [from, to] of DATA) {
-    await copyFile(join(ROOT, from), join(WEB, 'data', to))
+  for (const [from, to, optional] of DATA) {
+    try {
+      await copyFile(join(ROOT, from), join(WEB, 'data', to))
+    } catch (e) {
+      if (!optional) throw e
+      console.warn(`跳过可选数据 ${from}（${e.code}）`)
+    }
   }
 
   // 兜底自检：复制进来的模块不应含 node: 依赖，否则浏览器会在加载时报错
