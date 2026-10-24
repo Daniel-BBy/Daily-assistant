@@ -25,7 +25,9 @@ jobs:
       - name: 构建网页产物
         run: npm run build:web
 
-      - name: 检查产物里没有混进 node: 依赖
+      # 这行原来写成 `name: 检查产物里没有混进 node: 依赖`，
+      # 值里带 ": " 会让 YAML 解析成嵌套映射，整份工作流直接失效（GitHub 会显示成文件路径而不是 "CI"）。
+      - name: "检查产物里是否混进了 node: 依赖"
         run: |
           if grep -rl "from 'node:" web/lib/ ; then
             echo "::error::web/lib 里出现了 node: 依赖，浏览器会加载失败"
