@@ -214,6 +214,43 @@ const CAT_COLORS = {
   行业: '#94a3b8',
 }
 
+/**
+ * 固定格式的北京时间（MM-DD HH:mm）。
+ *
+ * 不能用 toLocaleString 直接拼：不同浏览器给出的分隔符和字段不一致
+ * （`10/24 07:05` 还是 `2026/10/24 07:05`），同一条数据在两台设备上会长得不一样。
+ * formatToParts 保证结果稳定。
+ *
+ * 必须显式写 timeZone：UTC 比北京慢 8 小时，晚上发的新闻用 UTC 日期会错一天，
+ * 现在这 10 条里就有 5 条属于这种情况。
+ */
+function fmtBeijing(iso) {
+  if (!iso) return ''
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return ''
+  const p = Object.fromEntries(
+    new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Shanghai',
+      month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', hour12: false,
+    }).formatToParts(d).map(x => [x.type, x.value]),
+  )
+  return `${p.month}-${p.day} ${p.hour}:${p.minute}`
+}
+
+/** 悬停时看的完整时间，带星期和时区说明。 */
+function fmtBeijingFull(iso) {
+  if (!iso) return ''
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return ''
+  const s = new Intl.DateTimeFormat('zh-CN', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric', month: 'long', day: 'numeric', weekday: 'long',
+    hour: '2-digit', minute: '2-digit', hour12: false,
+  }).format(d)
+  return `${s}（北京时间）`
+}
+
 async function loadNews() {
   let data
   try {
@@ -234,6 +271,8 @@ function renderNews(data) {
 
   $('news-list').innerHTML = items.map((n, i) => {
     const color = CAT_COLORS[n.category] ?? CAT_COLORS.行业
+    const time = fmtBeijing(n.publishedAt)
+    const timeFull = fmtBeijingFull(n.publishedAt)
     return `
       <li class="news-item">
         <span class="news-idx">${String(i + 1).padStart(2, '0')}</span>
@@ -241,6 +280,7 @@ function renderNews(data) {
           <div class="news-meta">
             <span class="news-cat" style="--c:${color}">${esc(n.category)}</span>
             <span class="news-src">${esc(n.source)}</span>
+            ${time ? `<time class="news-time" datetime="${esc(n.publishedAt)}" title="${esc(timeFull)}">${time}</time>` : ''}
           </div>
           <a class="news-h" href="${esc(n.url)}" target="_blank" rel="noopener noreferrer nofollow">${esc(n.title)}</a>
           <p class="news-p">${esc(n.summary)}</p>
@@ -251,7 +291,7 @@ function renderNews(data) {
   const t = data.generatedAt
     ? new Date(data.generatedAt).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour: '2-digit', minute: '2-digit' })
     : ''
-  $('news-foot').textContent = `内容来自各媒体 · 版权归原作者${t ? ` · 生成于 ${t}` : ''}`
+  $('news-foot').textContent = `内容来自各媒体，版权归原作者 · 按重要性排序${t ? ` · 生成于 ${t}` : ''}`
   $('news-panel').hidden = false
 }
 
