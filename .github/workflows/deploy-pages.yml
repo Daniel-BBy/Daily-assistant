@@ -1,12 +1,9 @@
-name: Deploy to GitHub Pages
+﻿name: Deploy to GitHub Pages
 
-# 推到 main 就自动构建并发布到 GitHub Pages。
-# 仓库设置里需要做一次：Settings → Pages → Source = GitHub Actions
+# 鎺ㄥ埌 main 灏辫嚜鍔ㄦ瀯寤哄苟鍙戝竷鍒?GitHub Pages銆?# 浠撳簱璁剧疆閲岄渶瑕佸仛涓€娆★細Settings 鈫?Pages 鈫?Source = GitHub Actions
 #
-# 注意：免费版 GitHub Pages 要求仓库是 public（private 仓库需要 Pro）。
-# 中国大陆访问 *.github.io 时快时慢；如果发现不稳定，把这个文件换成
-# README「部署」一节里的其他目标即可，前四步不用改。
-
+# 娉ㄦ剰锛氬厤璐圭増 GitHub Pages 瑕佹眰浠撳簱鏄?public锛坧rivate 浠撳簱闇€瑕?Pro锛夈€?# 涓浗澶ч檰璁块棶 *.github.io 鏃跺揩鏃舵參锛涘鏋滃彂鐜颁笉绋冲畾锛屾妸杩欎釜鏂囦欢鎹㈡垚
+# README銆岄儴缃层€嶄竴鑺傞噷鐨勫叾浠栫洰鏍囧嵆鍙紝鍓嶅洓姝ヤ笉鐢ㄦ敼銆?
 on:
   push:
     branches: [main]
@@ -25,7 +22,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-deploy
   cancel-in-progress: true
 
 jobs:
@@ -38,8 +35,7 @@ jobs:
         with:
           node-version: '22'
 
-      # 构建前先跑测试：数据或逻辑坏了就不该发到线上
-      - run: npm test
+      # 鏋勫缓鍓嶅厛璺戞祴璇曪細鏁版嵁鎴栭€昏緫鍧忎簡灏变笉璇ュ彂鍒扮嚎涓?      - run: npm test
 
       - run: npm run build:web
 
