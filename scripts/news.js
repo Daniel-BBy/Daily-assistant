@@ -23,7 +23,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const CATEGORIES = ['融资收购', '产品发布', '政策监管', '开源', '研究', '具身智能', '行业']
 
 function parseArgs(argv) {
-  const out = { hours: 24, limit: 10, dry: false, out: join(ROOT, 'data', 'news.json'), candidates: 18, perSource: 3 }
+  const out = { hours: 24, limit: 10, dry: false, force: false, out: join(ROOT, 'data', 'news.json'), candidates: 18, perSource: 3 }
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i]
     if (a === '--hours') out.hours = Number(argv[++i])
@@ -32,10 +32,26 @@ function parseArgs(argv) {
     else if (a === '--per-source') out.perSource = Number(argv[++i])
     else if (a === '--out') out.out = resolve(argv[++i])
     else if (a === '--dry') out.dry = true
+    else if (a === '--force') out.force = true
     else if (a === '--help' || a === '-h') out.help = true
     else throw new Error(`未知参数：${a}`)
   }
   return out
+}
+
+/** 北京时间今天（YYYY-MM-DD）。cron 跑在 UTC，日期必须按北京算。 */
+function todayBeijing() {
+  return new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10)
+}
+
+/** 读上一期，用于幂等判断。文件不存在或坏了都返回 null，不影响本次运行。 */
+async function readPrevious(path) {
+  try {
+    const { readFile } = await import('node:fs/promises')
+    return JSON.parse(await readFile(path, 'utf8'))
+  } catch {
+    return null
+  }
 }
 
 function buildPrompt(items, limit) {
@@ -123,6 +139,17 @@ async function main() {
     return 0
   }
 
+  // 幂等：今天已经生成过就跳过。
+  // cron 设了两个时间点（主跑 + 兜底），兜底那次必须秒退，不能重复花 LLM 的钱。
+  const today = todayBeijing()
+  if (!args.force) {
+    const prev = await readPrevious(args.out)
+    if (prev?.date === today) {
+      console.log(`已有 ${today} 的早报（${prev.items?.length ?? 0} 条），跳过。要重跑加 --force。`)
+      return 0
+    }
+  }
+
   console.log(`\n① 采集（最近 ${args.hours} 小时）`)
   const { items, stats } = await collect({ hours: args.hours })
   console.log(`   ${stats.feeds.join('  ')}`)
@@ -172,11 +199,18 @@ async function main() {
   const news = validate(parsed, picked)
   console.log(`   选出 ${news.length} 条 · 用量 ${usage.prompt_tokens ?? '?'} in / ${usage.completion_tokens ?? '?'} out`)
 
+  // 失败保护：宁可显示昨天的，也不要覆盖成空白页。
+  // 返回 0 让后续的构建/部署继续跑，页面上仍然是上一期的内容。
+  if (news.length < 5) {
+    console.error(`只选出 ${news.length} 条（少于 5），保留上一期，不覆盖 ${args.out}`)
+    return 0
+  }
+
   if (!args.dry) {
     await mkdir(dirname(args.out), { recursive: true })
     await writeFile(args.out, JSON.stringify({
       generatedAt: new Date().toISOString(),
-      date: new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10),
+      date: today,
       stats,
       usage,
       items: news,

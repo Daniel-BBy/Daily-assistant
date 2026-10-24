@@ -1,11 +1,13 @@
 name: Deploy to GitHub Pages
 
-# 推到 main 就自动构建并发布到 GitHub Pages。
-# 仓库设置里需要做一次：Settings → Pages → Source = GitHub Actions
+# 三种触发：
+#   push      —— 改代码就重新发布（用仓库里已有的 news.json，不抓新的）
+#   schedule  —— 每天北京时间 07:07 抓新闻 + 发布；07:37 兜底（脚本幂等，有今天的就直接跳过）
+#   dispatch  —— 手动跑，可选强制重抓
 #
-# 注意：免费版 GitHub Pages 要求仓库是 public（private 仓库需要 Pro）。
-# 中国大陆访问 *.github.io 时快时慢；如果发现不稳定，把这个文件换成
-# README「部署」一节里的其他目标即可，前四步不用改。
+# 为什么要在一个 workflow 里做完全部事：
+# 用 GITHUB_TOKEN 推的提交不会再触发 workflow（GitHub 防递归的设计），
+# 所以「跑完自动 commit → 顺带触发部署」这条链是断的，必须在这里直接部署。
 
 on:
   push:
@@ -17,18 +19,30 @@ on:
       - 'course_schedule.csv'
       - 'package.json'
       - '.github/workflows/deploy-pages.yml'
+  schedule:
+    # cron 一律按 UTC。北京 07:07 = UTC 前一日 23:07
+    - cron: '7 23 * * *'
+    # 兜底：北京 07:37。幂等判断会让它秒退，不重复花钱。
+    - cron: '37 23 * * *'
   workflow_dispatch:
+    inputs:
+      refresh_news:
+        description: 重新抓取新闻
+        type: boolean
+        default: true
+      force:
+        description: 强制重跑（忽略「今天已生成」）
+        type: boolean
+        default: false
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 concurrency:
-  # 组名从 pages 改成 pages-deploy：之前有一次运行卡在 in_progress 且无法取消，
-  # 把整个并发组锁死了，后续运行全部 pending。换组名可以立刻绕开。
   group: pages-deploy
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -40,16 +54,39 @@ jobs:
         with:
           node-version: '22'
 
-      # 构建前先跑测试：数据或逻辑坏了就不该发到线上
-      - run: npm test
+      - name: 单元测试
+        run: npm test
 
-      - run: npm run build:web
+      # 只有定时任务和手动触发才抓新闻；普通 push 用仓库里已有的那一期，省一次 LLM 调用
+      - name: 抓取今日新闻
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.refresh_news)
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: node scripts/news.js ${{ inputs.force && '--force' || '' }}
+
+      - name: 构建网页
+        run: npm run build:web
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web
+
+      # 存档：把这一期提交回仓库，方便回头看历史。
+      # 部署已经完成，这一步失败也不影响线上内容。
+      - name: 存档新闻
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.refresh_news)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/news.json
+          if git diff --cached --quiet; then
+            echo "news.json 没有变化，跳过提交"
+            exit 0
+          fi
+          git commit -m "news: $(date -u +%F)"
+          git push || (git pull --rebase --autostash && git push)
 
   deploy:
     needs: build
