@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-24T16:50:53.645Z",
+  "generatedAt": "2026-10-24T18:08:07.936Z",
   "date": "2026-10-25",
   "stats": {
     "raw": 155,
-    "inWindow": 108,
-    "relevant": 22,
-    "deduped": 22,
+    "inWindow": 87,
+    "relevant": 11,
+    "deduped": 11,
     "feeds": [
       "IT之家:60",
       "量子位:10",
@@ -17,20 +17,20 @@
     ]
   },
   "usage": {
-    "prompt_tokens": 3770,
-    "completion_tokens": 729,
-    "total_tokens": 4499,
+    "prompt_tokens": 2299,
+    "completion_tokens": 506,
+    "total_tokens": 2805,
     "prompt_tokens_details": {
-      "cached_tokens": 1920
+      "cached_tokens": 0
     },
-    "prompt_cache_hit_tokens": 1920,
-    "prompt_cache_miss_tokens": 1850
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2299
   },
   "items": [
     {
       "category": "行业",
-      "title": "OpenAI宣布不再用实时互联网训练模型",
-      "summary": "OpenAI于周五表示，将不再使用实时互联网数据训练其AI模型，理由是存在“重大风险”。此前其模型训练依赖联网抓取的内容。",
+      "title": "OpenAI称将不再用实时互联网训练模型",
+      "summary": "OpenAI于周五表示，将不再使用实时互联网数据训练其AI模型，理由是存在“重大风险”。该决定涉及前沿模型的训练数据来源调整。",
       "source": "TechCrunch",
       "sourceId": "tc",
       "url": "https://techcrunch.com/2026/10/23/openai-says-it-will-no-longer-train-its-ai-models-on-the-live-internet-citing-significant-risks/",
@@ -40,69 +40,33 @@
       "bodyMethod": "paragraphs"
     },
     {
-      "category": "产品发布",
-      "title": "Kimi发布K3.1 Pro开源模型",
-      "summary": "Kimi推出K3.1系列首个模型K3.1 Pro，为3T级开放权重模型，上下文窗口达100万token，在编程、3D创作、金融研究等智能体能力上有明显提升。同时发布Highspeed版本，速度提升2至3倍。",
-      "source": "Hacker News",
-      "sourceId": "hn",
-      "url": "https://www.kimi.ai/blog/kimi-k3-1-pro",
-      "publishedAt": "2026-10-23T16:59:08.000Z",
-      "originalTitle": "Kimi K3.1 Pro and K3.1 Pro Highspeed",
-      "score": 5.2,
-      "bodyMethod": "paragraphs"
-    },
-    {
       "category": "行业",
-      "title": "Claude付款页面新增中国及港澳台选项",
-      "summary": "用户反馈Claude升级支付页面出现中国大陆及港澳台地区选项，并支持绑定中国银联卡。但Anthropic帮助中心仍要求用户位于支持地区才能使用Claude，本月初网页端已新增简繁中文选项。",
+      "title": "Claude付款页新增中国及港澳台选项",
+      "summary": "有用户反馈Claude升级支付页面出现中国大陆及港澳台地区选项，并支持绑定中国银联卡。Anthropic帮助中心仍要求用户位于支持地区才能使用Claude。",
       "source": "IT之家",
       "sourceId": "ithome",
       "url": "https://www.ithome.com/1/017/490.htm",
       "publishedAt": "2026-10-24T11:39:49.000Z",
       "originalTitle": "Anthropic Claude 付款页面新增中国及港澳台地区选项，支持银联卡支付",
-      "score": 8,
+      "score": 7,
       "bodyMethod": "rss"
     },
     {
       "category": "行业",
       "title": "字节AI短剧平台小云雀并入即梦",
-      "summary": "字节跳动完成业务整合，AI短剧创作平台小云雀并入智能创作平台即梦，仍保留独立入口。即梦已接入小云雀的短剧相关能力，小云雀运营由即梦运营和市场负责人陈欣然负责，产品团队不变。",
+      "summary": "字节跳动完成业务整合，AI短剧创作平台小云雀并入智能创作平台即梦，产品保留独立入口。即梦已接入小云雀的短剧相关能力，运营由陈欣然负责。",
       "source": "IT之家",
       "sourceId": "ithome",
       "url": "https://www.ithome.com/1/017/480.htm",
       "publishedAt": "2026-10-24T10:59:27.000Z",
       "originalTitle": "消息称字节跳动 AI 短剧产品内部整合：小云雀并入即梦，仍保留独立入口",
-      "score": 6,
-      "bodyMethod": "rss"
-    },
-    {
-      "category": "产品发布",
-      "title": "讯飞发布SparkAudio 1.0语音基座模型",
-      "summary": "科大讯飞正式发布星火语音基座大模型SparkAudio 1.0，将复杂音频理解、情绪识别、实时说话人分离与环境声理解统一建模。同步升级端云一体模型星火X2.6及端侧模型Spark-X2.6-4B。",
-      "source": "InfoQ中文",
-      "sourceId": "infoq",
-      "url": "https://www.infoq.cn/article/Md0kdMxGI6flIbZXH1yg?utm_source=rss&utm_medium=article",
-      "publishedAt": "2026-10-23T11:39:27.000Z",
-      "originalTitle": "讯飞发布新一代端到端交互模型：语音大模型调用量暴涨20倍，端侧已实现约70%云端能力",
       "score": 5,
-      "bodyMethod": "paragraphs"
-    },
-    {
-      "category": "政策监管",
-      "title": "Meta因出版商反对推迟AI抓取新条款",
-      "summary": "Meta在出版商就AI抓取提出反对后，推迟了新的商业条款。该条款涉及平台内容被用于AI训练的相关安排。",
-      "source": "The Verge",
-      "sourceId": "verge",
-      "url": "https://www.theverge.com/tech/1017450/meta-business-terms-delayed-ai-scraping",
-      "publishedAt": "2026-10-23T14:47:41.000Z",
-      "originalTitle": "Meta delays new business terms after publisher pushback on AI scraping",
-      "score": 4.4,
-      "bodyMethod": "paragraphs"
+      "bodyMethod": "rss"
     },
     {
       "category": "开源",
       "title": "智源众智FlagOS 2.2实现跨芯复用",
-      "summary": "智源众智FlagOS 2.2从多芯适配走向跨芯复用，九大算子库合计覆盖1454个算子，较上版增加890个。在10款异构AI芯片测试中跨芯算子性能提升约27%。",
+      "summary": "FlagOS 2.2从多芯适配走向跨芯复用，九大算子库合计覆盖1454个算子，较上一版增加890个。测试范围内跨芯算子性能提升约27%。",
       "source": "InfoQ中文",
       "sourceId": "infoq",
       "url": "https://www.infoq.cn/article/mhdJwMMzYFedMFHKfHWs?utm_source=rss&utm_medium=article",
@@ -113,38 +77,50 @@
     },
     {
       "category": "产品发布",
-      "title": "Gremlin推出智能体可靠性平台Foresight AI",
-      "summary": "可靠性管理公司Gremlin宣布智能体产品Foresight AI全面上线，可分析服务潜在故障、给出优化建议并重跑测试验证修复。产品以四角色协同嵌入现有混沌工程工作流，作为平台附加组件提供。",
-      "source": "InfoQ中文",
-      "sourceId": "infoq",
-      "url": "https://www.infoq.cn/article/2bKQkdiAcGEycHJLYPv5?utm_source=rss&utm_medium=article",
-      "publishedAt": "2026-10-23T11:15:00.000Z",
-      "originalTitle": "Foresight AI 正式可用，Gremlin 将智能体引入可靠性工程",
-      "score": 6,
-      "bodyMethod": "paragraphs"
-    },
-    {
-      "category": "行业",
-      "title": "奥特曼访谈谈AI与人类工作变化",
-      "summary": "OpenAI CEO Sam Altman在45分钟访谈中表示，AI正深度介入数学证明、物理规律发现与疾病治疗研发，但人类工作强度未减反增，程序员等角色因需求激增而更忙碌。",
-      "source": "InfoQ中文",
-      "sourceId": "infoq",
-      "url": "https://www.infoq.cn/article/sI3z2UMCrB5PPVDWTsLo?utm_source=rss&utm_medium=article",
-      "publishedAt": "2026-10-23T17:35:04.000Z",
-      "originalTitle": "奥特曼最新 45 分钟访谈：一年不写代码、压力大到不想起床，还嫌 ChatGPT 太谄媚",
-      "score": 5,
-      "bodyMethod": "paragraphs"
-    },
-    {
-      "category": "产品发布",
-      "title": "Block推出像新朋友般对话的AI模型",
-      "summary": "Jack Dorsey旗下Block发布了一款AI模型，其对话风格被形容为像一位略显笨拙的新朋友。",
+      "title": "Block推出像笨拙新朋友般对话的AI模型",
+      "summary": "Jack Dorsey旗下Block做出一款AI模型，其对话风格被形容为像一位笨拙的新朋友。该模型属于AI对话产品方向。",
       "source": "The Verge",
       "sourceId": "verge",
       "url": "https://www.theverge.com/ai-artificial-intelligence/1017906/jack-dorsey-block-dessa-ai-voice-speech",
       "publishedAt": "2026-10-23T19:32:39.000Z",
       "originalTitle": "Jack Dorsey’s Block made an AI model that talks to you like an awkward new friend",
       "score": 4.9,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "研究",
+      "title": "测试显示Grok选共和党OpenAI选民主党",
+      "summary": "多数AI聊天机器人不会直接告诉用户投票给谁，但在被迫选择时，Grok的AI模型选择共和党，OpenAI的模型选择民主党。",
+      "source": "TechCrunch",
+      "sourceId": "tc",
+      "url": "https://techcrunch.com/2026/10/24/forced-to-pick-groks-ai-model-chooses-republicans-openais-picks-democrats/",
+      "publishedAt": "2026-10-24T15:00:00.000Z",
+      "originalTitle": "Forced to pick, Grok’s AI model chooses Republicans. OpenAI’s picks Democrats.",
+      "score": 8.6,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "产品发布",
+      "title": "多款AI智能体可直接驻留短信应用",
+      "summary": "越来越多AI智能体无需下载新应用，可直接驻留在用户的短信中。TechCrunch盘点了这类可生活在短信里的AI智能体。",
+      "source": "TechCrunch",
+      "sourceId": "tc",
+      "url": "https://techcrunch.com/2026/10/24/all-the-ai-agents-that-can-live-in-your-text-messages/",
+      "publishedAt": "2026-10-24T14:00:00.000Z",
+      "originalTitle": "Here are the top AI agents that can live in your text messages",
+      "score": 6.6,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "具身智能",
+      "title": "英伟达CEO把玩Microduck机器人售出两万台",
+      "summary": "本周一段英伟达CEO黄仁勋把玩一群Microduck机器人的视频流传，该机器人已售出20000台。它被视为圣诞热门玩具候选。",
+      "source": "TechCrunch",
+      "sourceId": "tc",
+      "url": "https://techcrunch.com/2026/10/23/hottest-toy-for-christmas-nvidia-ceo-plays-with-adorable-microduck-robots-20000-sell/",
+      "publishedAt": "2026-10-23T21:59:19.000Z",
+      "originalTitle": "Hottest toy for Christmas? Nvidia CEO plays with adorable Microduck robots, 20,000 sell",
+      "score": 5.6,
       "bodyMethod": "paragraphs"
     }
   ]
