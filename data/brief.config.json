@@ -1,0 +1,35 @@
+{
+  "place": {
+    "name": "太仓",
+    "admin": "江苏省苏州市",
+    "latitude": 31.4478,
+    "longitude": 121.0939,
+    "timezone": "Asia/Shanghai"
+  },
+  "units": {
+    "temperature": "celsius",
+    "wind": "ms"
+  },
+  "thresholds": {
+    "_comment": "阈值参照国标，仅用于自算风险提示，不代表官方预警信号",
+    "windGust": { "warn": 10.8, "alert": 13.9, "severe": 20.8 },
+    "rain24h": { "info": 10, "warn": 50, "alert": 100 },
+    "heat": { "warn": 35, "alert": 37 },
+    "cold": { "drop": 8, "minAbs": 4 },
+    "fog": { "warn": 1000, "alert": 500, "severe": 200 },
+    "ice": { "temp": 0, "precip": 0.1 },
+    "uv": { "warn": 8 }
+  },
+  "morningWindow": { "startHour": 6, "endHour": 10 },
+  "paths": {
+    "term": "data/term.json",
+    "schedule": "course_schedule.csv"
+  },
+  "delivery": {
+    "mode": "stdout",
+    "webhook": {
+      "url": "",
+      "timeoutMs": 5000
+    }
+  }
+}

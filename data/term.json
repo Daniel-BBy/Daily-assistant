@@ -1,0 +1,81 @@
+{
+  "academicYear": "2026-2027",
+  "university": "Xi'an Jiaotong-Liverpool University",
+  "timezone": "Asia/Shanghai",
+  "note": "周次表按校历逐行核对：红色=法定假日、紫色=学校关闭，两者都表示不上课。周次为 null 表示该段不在任何教学周内。",
+  "terms": [
+    {
+      "name": "Semester 1",
+      "blocks": [
+        { "week": 0, "start": "2026-08-31", "end": "2026-09-06", "teaching": false, "kind": "registration", "label": "Week 0 注册周" },
+        { "week": 1, "start": "2026-09-07", "end": "2026-09-13", "teaching": true, "kind": "teaching" },
+        { "week": 2, "start": "2026-09-14", "end": "2026-09-20", "teaching": true, "kind": "teaching" },
+        { "week": 3, "start": "2026-09-21", "end": "2026-09-27", "teaching": true, "kind": "teaching" },
+        { "week": null, "start": "2026-09-28", "end": "2026-10-04", "teaching": false, "kind": "closure", "label": "国庆假期（学校关闭）" },
+        { "week": 4, "start": "2026-10-05", "end": "2026-10-11", "teaching": true, "kind": "teaching" },
+        { "week": 5, "start": "2026-10-12", "end": "2026-10-18", "teaching": true, "kind": "teaching" },
+        { "week": 6, "start": "2026-10-19", "end": "2026-10-25", "teaching": true, "kind": "teaching" },
+        { "week": 7, "start": "2026-10-26", "end": "2026-11-01", "teaching": true, "kind": "teaching" },
+        { "week": 8, "start": "2026-11-02", "end": "2026-11-08", "teaching": true, "kind": "teaching" },
+        { "week": 9, "start": "2026-11-09", "end": "2026-11-15", "teaching": true, "kind": "teaching" },
+        { "week": 10, "start": "2026-11-16", "end": "2026-11-22", "teaching": true, "kind": "teaching" },
+        { "week": 11, "start": "2026-11-23", "end": "2026-11-29", "teaching": true, "kind": "teaching" },
+        { "week": 12, "start": "2026-11-30", "end": "2026-12-06", "teaching": true, "kind": "teaching" },
+        { "week": 13, "start": "2026-12-07", "end": "2026-12-13", "teaching": true, "kind": "teaching" },
+        { "week": null, "start": "2026-12-14", "end": "2026-12-20", "teaching": false, "kind": "reading", "label": "阅读周" },
+        { "week": null, "start": "2026-12-21", "end": "2026-12-27", "teaching": false, "kind": "reading", "label": "阅读周（含圣诞）" },
+        { "week": null, "start": "2026-12-28", "end": "2027-01-03", "teaching": false, "kind": "exam", "label": "考试周（含元旦）" },
+        { "week": null, "start": "2027-01-04", "end": "2027-01-10", "teaching": false, "kind": "exam", "label": "考试周" },
+        { "week": null, "start": "2027-01-11", "end": "2027-01-17", "teaching": false, "kind": "winter", "label": "冬季课程（Winter School）" },
+        { "week": null, "start": "2027-01-18", "end": "2027-01-24", "teaching": false, "kind": "winter", "label": "冬季课程（Winter School）" },
+        { "week": null, "start": "2027-01-25", "end": "2027-01-31", "teaching": false, "kind": "winter", "label": "冬季课程（Winter School）" }
+      ],
+      "holidays": [
+        { "date": "2026-09-25", "label": "中秋节" }
+      ]
+    },
+    {
+      "name": "Semester 2",
+      "blocks": [
+        { "week": null, "start": "2027-02-01", "end": "2027-02-07", "teaching": false, "kind": "closure", "label": "春节假期（学校关闭）" },
+        { "week": null, "start": "2027-02-08", "end": "2027-02-14", "teaching": false, "kind": "closure", "label": "春节假期（学校关闭）" },
+        { "week": 0, "start": "2027-02-15", "end": "2027-02-21", "teaching": false, "kind": "registration", "label": "Week 0 注册周" },
+        { "week": 1, "start": "2027-02-22", "end": "2027-02-28", "teaching": true, "kind": "teaching" },
+        { "week": 2, "start": "2027-03-01", "end": "2027-03-07", "teaching": true, "kind": "teaching" },
+        { "week": 3, "start": "2027-03-08", "end": "2027-03-14", "teaching": true, "kind": "teaching" },
+        { "week": 4, "start": "2027-03-15", "end": "2027-03-21", "teaching": true, "kind": "teaching" },
+        { "week": 5, "start": "2027-03-22", "end": "2027-03-28", "teaching": true, "kind": "teaching" },
+        { "week": 6, "start": "2027-03-29", "end": "2027-04-04", "teaching": true, "kind": "teaching" },
+        { "week": 7, "start": "2027-04-05", "end": "2027-04-11", "teaching": true, "kind": "teaching" },
+        { "week": 8, "start": "2027-04-12", "end": "2027-04-18", "teaching": true, "kind": "teaching" },
+        { "week": 9, "start": "2027-04-19", "end": "2027-04-25", "teaching": true, "kind": "teaching" },
+        { "week": 10, "start": "2027-04-26", "end": "2027-05-02", "teaching": true, "kind": "teaching" },
+        { "week": 11, "start": "2027-05-03", "end": "2027-05-09", "teaching": true, "kind": "teaching" },
+        { "week": 12, "start": "2027-05-10", "end": "2027-05-16", "teaching": true, "kind": "teaching" },
+        { "week": 13, "start": "2027-05-17", "end": "2027-05-23", "teaching": true, "kind": "teaching" },
+        { "week": null, "start": "2027-05-24", "end": "2027-05-30", "teaching": false, "kind": "reading", "label": "阅读周" },
+        { "week": null, "start": "2027-05-31", "end": "2027-06-06", "teaching": false, "kind": "exam", "label": "考试周" },
+        { "week": null, "start": "2027-06-07", "end": "2027-06-13", "teaching": false, "kind": "exam", "label": "考试周（含端午）" },
+        { "week": null, "start": "2027-06-14", "end": "2027-06-20", "teaching": false, "kind": "summer", "label": "暑期课程（Summer School）" },
+        { "week": null, "start": "2027-06-21", "end": "2027-06-27", "teaching": false, "kind": "summer", "label": "暑期课程（Summer School）" },
+        { "week": null, "start": "2027-06-28", "end": "2027-07-04", "teaching": false, "kind": "summer", "label": "暑期课程（Summer School）" },
+        { "week": null, "start": "2027-07-05", "end": "2027-07-11", "teaching": false, "kind": "summer", "label": "暑期课程（Summer School）" },
+        { "week": null, "start": "2027-07-12", "end": "2027-07-18", "teaching": false, "kind": "summer", "label": "暑期课程（Summer School）" },
+        { "week": null, "start": "2027-07-19", "end": "2027-07-25", "teaching": false, "kind": "resit", "label": "阅读周（补考）" },
+        { "week": null, "start": "2027-07-26", "end": "2027-08-01", "teaching": false, "kind": "resit", "label": "阅读周（补考，含毕业典礼）" },
+        { "week": null, "start": "2027-08-02", "end": "2027-08-08", "teaching": false, "kind": "resit", "label": "补考周" },
+        { "week": null, "start": "2027-08-09", "end": "2027-08-15", "teaching": false, "kind": "summer", "label": "暑期课程（Summer School）" },
+        { "week": null, "start": "2027-08-16", "end": "2027-08-22", "teaching": false, "kind": "summer", "label": "暑期课程（Summer School）" },
+        { "week": null, "start": "2027-08-23", "end": "2027-08-29", "teaching": false, "kind": "summer", "label": "暑期课程（Summer School）" },
+        { "week": null, "start": "2027-08-30", "end": "2027-09-05", "teaching": false, "kind": "summer", "label": "暑期课程（Summer School）" }
+      ],
+      "holidays": [
+        { "date": "2027-04-05", "label": "清明节" },
+        { "date": "2027-05-01", "label": "劳动节" },
+        { "date": "2027-05-02", "label": "劳动节" },
+        { "date": "2027-05-03", "label": "劳动节" },
+        { "date": "2027-05-04", "label": "劳动节" }
+      ]
+    }
+  ]
+}

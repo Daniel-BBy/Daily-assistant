@@ -1,0 +1,12 @@
+{
+  "name": "daily-brief",
+  "private": true,
+  "type": "module",
+  "description": "每日简报：天气 + 课程（Node CLI 与浏览器共用同一套纯逻辑）",
+  "scripts": {
+    "brief": "node scripts/brief.js",
+    "courses": "node scripts/courses-cli.js",
+    "test": "node test/risks.test.js && node test/courses.test.js",
+    "build:web": "node scripts/build-web.js"
+  }
+}

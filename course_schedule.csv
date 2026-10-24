@@ -1,0 +1,31 @@
+﻿Day,Time,Course,Weeks,Teacher,Room
+周一,09:00-09:50,INF101TC Lecture,"5, 11",Muhammad Ateeq,TC-DE-2001
+周一,09:00-09:50,INF101TC Lecture,"1, 4, 8, 10",Angelos Stefanidis,TC-DE-2001
+周一,15:00-16:50,MFE103TC Lecture,8-12,Hongyan Zhang,TC-D-1021
+周一,15:00-16:50,MFE103TC Seminar,13,Yuyi Zhu,TC-D-1021
+周二,09:00-10:50,INF101TC Lecture,"3, 6, 9, 12",Duncan Roulstone,TC-C-4019
+周二,13:00-13:50,ENT103TC Practical,"1, 3, 4-6, 8-10",Boyi Jin,TC-AB-3004
+周二,13:00-15:50,ENT103TC Practical,"2, 7",Antonio Benitez Garcia,TC-C-4019
+周二,14:00-15:50,ENT103TC Practical,"1, 3, 4-6, 8-10",Weili Cui,TC-BC-2005
+周二,16:00-17:50,MFE104TC Lecture,8-13,Gomesh Nair,TC-DE-2001
+周三,09:00-12:50,RBE101TC Lecture,"1-3, 4-5",Wenjun Zhu-IRE,TC-FG-2001
+周三,14:00-15:50,MFE104TC Lab,"9, 11",Sze-Hong Teh,TC-A-3032
+周三,14:00-15:50,MFE104TC Lab,13,Gomesh Nair,TC-G-2020
+周三,14:00-15:50,MFE113TC Seminar,6,Jiachen Liu,TC-B-3046
+周三,14:00-15:50,MFE113TC Lecture,"1-3, 4-5",Jiachen Liu,TC-B-3046
+周三,16:00-17:50,MFE104TC Lecture,8-13,Gomesh Nair,TC-DE-2001
+周三,16:00-17:50,MFE113TC Lab,"1-3, 4",Jiachen Liu,TC-B-3046
+周三,16:00-17:50,MFE113TC Lab,5,Jiachen Liu,TC-B-3046
+周三,16:00-17:50,MFE113TC Tutorial,6,Jiachen Liu,TC-B-3046
+周三,18:00-18:50,RBE101TC Tutorial,"1-3, 4-6",Wenjun Zhu-IRE,TC-FG-2001
+周四,09:00-11:50,MFE103TC Lab,8-11,Hongyan Zhang,TC-A-3037
+周四,09:00-12:50,RBE101TC Lecture,"1-3, 4-5",Wenjun Zhu-IRE,TC-FG-2001
+周四,09:00-10:50,RBE101TC Seminar,6,Wenjun Zhu-IRE,TC-FG-2001
+周四,14:00-15:50,MFE104TC Lecture,8-13,Gomesh Nair,TC-DE-2001
+周五,09:00-10:50,MFE103TC Lecture,8-12,Hongyan Zhang,TC-D-1021
+周五,09:00-10:50,MFE113TC Lecture,"1-3, 4-5",Jiachen Liu,TC-B-3046
+周五,11:00-12:50,INF101TC Seminar,"1-3, 4-6, 8-13",Hanming Huang,TC-B-3047
+周五,14:00-14:50,CCT009 Lecture,"1-3, 4-13",Xiaodan Guo,TC-FG-2001
+周五,16:00-17:50,MFE113TC Lab,"1-3, 4",Jiachen Liu,TC-D-2001
+周五,16:00-17:50,MFE104TC Tutorial,8-13,Gomesh Nair,TC-AB-2002
+周五,16:00-17:50,MFE113TC Tutorial,5,Jiachen Liu,TC-D-2001

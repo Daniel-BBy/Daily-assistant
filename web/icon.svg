@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="每日简报">
+  <rect width="512" height="512" rx="112" fill="#0f1115"/>
+  <circle cx="256" cy="232" r="96" fill="#f5c451"/>
+  <path d="M104 372h304a52 52 0 0 0 0-104 78 78 0 0 0-148-20 56 56 0 0 0-56 124z" fill="#e6e8ec" opacity="0.92"/>
+  <rect x="150" y="404" width="212" height="18" rx="9" fill="#6ea8fe"/>
+</svg>

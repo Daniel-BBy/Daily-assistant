@@ -1,0 +1,39 @@
+name: CI
+
+# 每次 push / PR 都跑测试和构建，保证主干不会悄无声息地坏掉。
+# 这里不部署，只验证。
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 单元测试（39 个，不联网）
+        run: npm test
+
+      - name: 构建网页产物
+        run: npm run build:web
+
+      - name: 检查产物里没有混进 node: 依赖
+        run: |
+          if grep -rl "from 'node:" web/lib/ ; then
+            echo "::error::web/lib 里出现了 node: 依赖，浏览器会加载失败"
+            exit 1
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: web
+          retention-days: 7

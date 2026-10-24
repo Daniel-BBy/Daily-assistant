@@ -1,0 +1,60 @@
+name: Deploy to GitHub Pages
+
+# 推到 main 就自动构建并发布到 GitHub Pages。
+# 仓库设置里需要做一次：Settings → Pages → Source = GitHub Actions
+#
+# 注意：免费版 GitHub Pages 要求仓库是 public（private 仓库需要 Pro）。
+# 中国大陆访问 *.github.io 时快时慢；如果发现不稳定，把这个文件换成
+# README「部署」一节里的其他目标即可，前四步不用改。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - 'scripts/**'
+      - 'data/**'
+      - 'course_schedule.csv'
+      - 'package.json'
+      - '.github/workflows/deploy-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # 构建前先跑测试：数据或逻辑坏了就不该发到线上
+      - run: npm test
+
+      - run: npm run build:web
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,25 @@
+# 依赖（本项目零运行时依赖，这两行是给以后可能加的工具留的）
+node_modules/
+
+# 构建产物：由 `npm run build:web` 从 scripts/ 和 data/ 复制生成，不入库
+web/lib/
+web/data/
+
+# 运行期产物
+.tmp/
+*.log
+data/brief.log
+.env
+
+# 参考用的第三方源码（dsh-daily-kit 的本地副本），不属于本仓库
+dsh-daily-kit-main/
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# �û��ϴ��Ŀα���ͼ��������ֿ�
+*.jpg
+*.jpeg
