@@ -130,19 +130,65 @@ daily:   weather_code, temperature_2m_max/min, apparent_temperature_max/min,
 
 要接官方源，最小改动是：在 `brief.mjs` 里给 `alerts` 赋值，并在 `render.mjs` 的风险段落前插一行官方预警原文。推荐和风天气 `GET /weatheralert/v1/current/{lat}/{lon}`（就是 CMA 预警的授权转发，无预警时 `zeroResult: true`）。
 
-## 定时（每天 08:30）
+## 定时（每天 07:00 北京时间）
 
-Windows 任务计划程序：
+主力是**阿里云函数计算**上的一个小函数，只做一件事：到点调 GitHub 的 `workflow_dispatch`，把抓取和发布交给 GitHub Actions。
 
-```bat
-schtasks /create /tn "DailyWeatherBrief" /sc daily /st 08:30 ^
-  /tr "\"C:\Users\daniel\Desktop\Assistant\scripts\run-brief.cmd\" > \"C:\Users\daniel\Desktop\Assistant\data\brief.log\" 2>&1"
+```
+阿里云 FC  07:00（北京）
+      │  POST /actions/workflows/deploy-pages.yml/dispatches
+      ▼
+GitHub Actions  抓新闻 → 构建 → 部署 → 存档
+      ▲
+      │  兜底：GitHub 自己的 cron，北京 05:30
 ```
 
-查看：`schtasks /query /tn "DailyWeatherBrief" /v /fo list`
-删除：`schtasks /delete /tn "DailyWeatherBrief" /f`
+### 为什么不在云函数里干全部活
 
-注意：`schtasks` 的 `/tr` 对引号敏感，若报错，改用「任务计划程序」图形界面新建"启动程序"，程序填 `run-brief.cmd` 的完整路径即可。
+| 环节 | 云函数做会怎样 |
+|---|---|
+| 抓 7 个源 | TechCrunch / The Verge 从国内出口不稳，候选池会塌 |
+| git 提交 | 运行环境里没有 git，得改用 REST API 拼 commit |
+| 执行时长 | 一轮 60–120 秒，得手动调超时 |
+
+而 GitHub 那台机器在美国，7 个源全通，Node 和 git 都是现成的。
+
+### 云函数配置（cn-shanghai）
+
+| 项 | 值 |
+|---|---|
+| 函数名 | `gh-dispatch` |
+| 运行时 | `nodejs20` / handler `index.handler` |
+| 内存 / 超时 | 128 MB / 30 秒 |
+| 环境变量 | `GH_TOKEN`、`GH_REPO`、`GH_WORKFLOW`、`GH_REF` |
+| 定时触发器 | `daily-0700` |
+| cron | **`CRON_TZ=Asia/Shanghai 0 0 7 * * *`** |
+
+> ⚠️ **阿里云 FC 的 cron 默认按 UTC 解释**（[官方文档](https://help.aliyun.com/zh/functioncompute/time-triggers)）。
+> 直接写 `0 0 7 * * *` 会在北京时间 **15:00** 触发，而且不报错。
+> 必须带 `CRON_TZ=Asia/Shanghai` 前缀。这一点是实测出来的，不是看文档推的。
+
+### 为什么 GitHub 的 cron 只留一个 05:30
+
+实测 GitHub 的 `schedule` 会延迟 **2 小时以上**（设 07:07，实际 09:03 才启动）。所以它不能当主力，只保留一个更早的时间点兜底。
+
+### 三层里谁负责什么
+
+| 层 | 负责 | 频率 |
+|---|---|---|
+| 阿里云 FC | 准点踢一脚 | 每天 07:00 |
+| GitHub Actions | 抓取、LLM、构建、部署 | 被踢时 |
+| GitHub cron | 万一云函数没触发 | 每天 05:30（兜底） |
+
+函数本身有 3 次重试；`news.js` 有幂等（今天已生成就跳过）和「少于 5 条不覆盖」，所以多层触发是安全的。
+
+### 本地手动跑（不走云函数）
+
+```bat
+scripts\run-brief.cmd
+```
+
+旧的 Windows 任务计划程序方案已弃用（笔记本 Modern Standby、非管理员账号下唤醒不可靠）。
 
 ## 今日课程
 
