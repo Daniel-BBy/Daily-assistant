@@ -251,39 +251,99 @@ function fmtBeijingFull(iso) {
   return `${s}（北京时间）`
 }
 
-async function loadNews() {
-  let data
-  try {
-    const r = await fetch('data/news.json', { cache: 'no-cache' })
-    if (!r.ok) return
-    data = await r.json()
-  } catch {
-    return // 没有新闻数据时什么都不显示，不影响课程和天气
-  }
-  renderNews(data)
+/**
+ * 往期：数据在 data/news/ 下每天一个文件，外加一份 index.json 清单。
+ *
+ * 纯静态站不能列目录，所以“有哪些期”必须由清单显式给出。
+ * 期号按时间正序数：最早的一期是第 1 期，越大越新。
+ */
+const news = { index: null, date: null, cache: new Map() }
+
+/** 从 URL hash 读想看哪一期：`#news/2026-10-24` */
+function dateFromHash() {
+  const m = location.hash.match(/^#news\/(\d{4}-\d{2}-\d{2})$/)
+  return m ? m[1] : null
 }
 
-function renderNews(data) {
+function issueNumber(date) {
+  const days = news.index?.days ?? []
+  const pos = days.findIndex(d => d.date === date)   // 0 = 最新
+  return pos < 0 ? null : days.length - pos          // 最新那期 = 总期数
+}
+
+async function loadNews() {
+  try {
+    const r = await fetch('data/news/index.json', { cache: 'no-cache' })
+    if (!r.ok) return
+    news.index = await r.json()
+  } catch {
+    return // 没有新闻数据时整块不显示，不影响课程和天气
+  }
+  if (!news.index?.days?.length) return
+
+  const wanted = dateFromHash()
+  const date = news.index.days.some(d => d.date === wanted) ? wanted : news.index.latest
+  await showIssue(date)
+  renderArchive()
+
+  window.addEventListener('hashchange', async () => {
+    const d = dateFromHash()
+    if (d && d !== news.date && news.index.days.some(x => x.date === d)) {
+      await showIssue(d)
+      renderArchive()
+    }
+  })
+}
+
+async function showIssue(date) {
+  let issue = news.cache.get(date)
+  if (!issue) {
+    try {
+      const r = await fetch(`data/news/${date}.json`, { cache: 'no-cache' })
+      if (!r.ok) return
+      issue = await r.json()
+      news.cache.set(date, issue)
+    } catch {
+      return
+    }
+  }
+  news.date = date
+  renderIssue(issue)
+  // 用 replaceState 而不是赋值 hash：切换期数不该在浏览器历史里堆一堆记录
+  history.replaceState(null, '', `#news/${date}`)
+}
+
+function renderIssue(data) {
   const items = Array.isArray(data?.items) ? data.items : []
   if (items.length === 0) return
 
+  const n = news.index.days.length
+  const num = issueNumber(data.date)
   $('news-date').textContent = String(data.date ?? '').replace(/-/g, '.')
 
-  $('news-list').innerHTML = items.map((n, i) => {
-    const color = CAT_COLORS[n.category] ?? CAT_COLORS.行业
-    const time = fmtBeijing(n.publishedAt)
-    const timeFull = fmtBeijingFull(n.publishedAt)
+  const badge = $('news-issue')
+  if (num) {
+    badge.textContent = `第 ${num} / ${n} 期`
+    badge.hidden = false
+  } else {
+    badge.hidden = true
+  }
+
+  $('news-list').innerHTML = items.map((it, i) => {
+    const color = CAT_COLORS[it.category] ?? CAT_COLORS.行业
+    const time = fmtBeijing(it.publishedAt)
+    const timeFull = fmtBeijingFull(it.publishedAt)
     return `
       <li class="news-item">
         <span class="news-idx">${String(i + 1).padStart(2, '0')}</span>
         <div class="news-body">
           <div class="news-meta">
-            <span class="news-cat" style="--c:${color}">${esc(n.category)}</span>
-            <span class="news-src">${esc(n.source)}</span>
-            ${time ? `<time class="news-time" datetime="${esc(n.publishedAt)}" title="${esc(timeFull)}">${time}</time>` : ''}
+            <span class="news-cat" style="--c:${color}">${esc(it.category)}</span>
+            <span class="news-src">${esc(it.source)}</span>
+            ${time ? `<time class="news-time" datetime="${esc(it.publishedAt)}" title="${esc(timeFull)}">${time}</time>` : ''}
           </div>
-          <a class="news-h" href="${esc(n.url)}" target="_blank" rel="noopener noreferrer nofollow">${esc(n.title)}</a>
-          <p class="news-p">${esc(n.summary)}</p>
+          <a class="news-h" href="${esc(it.url)}" target="_blank" rel="noopener noreferrer nofollow">${esc(it.title)}</a>
+          <p class="news-p">${esc(it.summary)}</p>
         </div>
       </li>`
   }).join('')
@@ -293,6 +353,36 @@ function renderNews(data) {
     : ''
   $('news-foot').textContent = `内容来自各媒体，版权归原作者 · 按重要性排序${t ? ` · 生成于 ${t}` : ''}`
   $('news-panel').hidden = false
+}
+
+/** 往期列表：列出除当前期之外的所有期，最新的在前。 */
+function renderArchive() {
+  const panel = $('news-archive')
+  const list = $('news-archive-list')
+  const others = (news.index?.days ?? []).filter(d => d.date !== news.date)
+
+  if (others.length === 0) {
+    panel.hidden = true
+    return
+  }
+
+  list.innerHTML = others.map(d => {
+    const num = issueNumber(d.date)
+    return `
+      <li>
+        <button class="news-past" type="button" data-date="${esc(d.date)}">
+          <span class="news-past-date">${esc(d.date.slice(5).replace('-', '-'))}</span>
+          <span class="news-past-num">第 ${num} 期</span>
+          <span class="news-past-top">${esc(d.top ?? '')}</span>
+        </button>
+      </li>`
+  }).join('')
+
+  for (const btn of list.querySelectorAll('.news-past')) {
+    btn.addEventListener('click', () => showIssue(btn.dataset.date).then(renderArchive))
+  }
+
+  panel.hidden = false
 }
 
 main()

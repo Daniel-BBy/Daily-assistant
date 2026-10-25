@@ -284,8 +284,25 @@ IT之家 / 量子位 / InfoQ中文 / 新浪科技 / TechCrunch / The Verge / Hac
         ↓
    LLM：从候选里选 10 条、判分类、写两句摘要
         ↓
-   data/news.json → 页面卡片
+   data/news/YYYY-MM-DD.json + index.json → 页面卡片
 ```
+
+### 往期存档
+
+每天一期，一个文件，外加一份清单：
+
+```
+data/news/
+├── index.json            ← 有哪些期、每期条数和首条标题
+├── 2026-10-25.json
+└── 2026-10-26.json
+```
+
+**为什么需要 `index.json`**：纯静态站不能列目录，浏览器没法"看看这个文件夹里有什么"，必须由清单显式告诉前端。
+
+页面上的「往期」列表就是读这份清单；点某一期时按需 fetch 那一天的文件（约 6 KB），不一次性加载全部。`#news/2026-10-24` 这样的 URL 可以直接分享。
+
+期号按时间正序数：最早的一期是第 1 期，页面上显示为「第 N / 总数 期」。
 
 ### 三层职责要分清
 
@@ -312,12 +329,18 @@ IT之家 / 量子位 / InfoQ中文 / 新浪科技 / TechCrunch / The Verge / Hac
 ### 运行
 
 ```bat
-node scripts\news.js                    :: 默认最近 24h，出 10 条
+node scripts\news.js                    :: 默认最近 24h，出 10 条，写到 data/news/
+node scripts\news.js --force            :: 今天已经生成过也重跑一次
 node scripts\news.js --hours 30 --dry   :: 只看结果不写文件
 node scripts\news-probe.js --hours 30   :: 只看候选池，不调用 LLM（调试信源用）
 ```
 
 成本：每次约 3.8k 输入 + 0.7k 输出，**一天一两分钱**。
+
+两条保护规则：
+
+- **幂等**：`data/news/今天.json` 已存在就跳过。cron 设了主跑 + 兜底两个时间点，兜底那次 0.2 秒退出。
+- **失败不覆盖**：选出少于 5 条时不写文件，页面继续显示上一期，而不是变成空白。
 
 ### 已知限制
 

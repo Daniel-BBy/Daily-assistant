@@ -80,9 +80,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/news.json
+          git add data/news
           if git diff --cached --quiet; then
-            echo "news.json 没有变化，跳过提交"
+            echo "data/news 没有变化，跳过提交"
             exit 0
           fi
           git commit -m "news: $(TZ=Asia/Shanghai date +%F)"

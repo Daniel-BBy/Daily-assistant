@@ -23,14 +23,14 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const CATEGORIES = ['融资收购', '产品发布', '政策监管', '开源', '研究', '具身智能', '行业']
 
 function parseArgs(argv) {
-  const out = { hours: 24, limit: 10, dry: false, force: false, out: join(ROOT, 'data', 'news.json'), candidates: 18, perSource: 3 }
+  const out = { hours: 24, limit: 10, dry: false, force: false, dir: join(ROOT, 'data', 'news'), candidates: 18, perSource: 3 }
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i]
     if (a === '--hours') out.hours = Number(argv[++i])
     else if (a === '--limit') out.limit = Number(argv[++i])
     else if (a === '--candidates') out.candidates = Number(argv[++i])
     else if (a === '--per-source') out.perSource = Number(argv[++i])
-    else if (a === '--out') out.out = resolve(argv[++i])
+    else if (a === '--dir') out.dir = resolve(argv[++i])
     else if (a === '--dry') out.dry = true
     else if (a === '--force') out.force = true
     else if (a === '--help' || a === '-h') out.help = true
@@ -44,14 +44,26 @@ function todayBeijing() {
   return new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10)
 }
 
-/** 读上一期，用于幂等判断。文件不存在或坏了都返回 null，不影响本次运行。 */
-async function readPrevious(path) {
+/**
+ * 维护往期索引。
+ *
+ * 静态站不能列目录，浏览器没法"看看这个文件夹里有什么"，
+ * 必须有一份显式清单告诉前端存在哪些期。
+ */
+async function updateIndex(dir, entry) {
+  const { readFile } = await import('node:fs/promises')
+  let index = { days: [] }
   try {
-    const { readFile } = await import('node:fs/promises')
-    return JSON.parse(await readFile(path, 'utf8'))
-  } catch {
-    return null
-  }
+    index = JSON.parse(await readFile(join(dir, 'index.json'), 'utf8'))
+  } catch { /* 第一期：从零开始建 */ }
+
+  const days = (index.days ?? []).filter(d => d.date !== entry.date)
+  days.push(entry)
+  days.sort((a, b) => (a.date < b.date ? 1 : -1))   // 新的在前
+
+  const next = { updatedAt: new Date().toISOString(), latest: days[0].date, days }
+  await writeFile(join(dir, 'index.json'), JSON.stringify(next, null, 2) + '\n', 'utf8')
+  return next
 }
 
 function buildPrompt(items, limit) {
@@ -135,17 +147,18 @@ function validate(parsed, items) {
 async function main() {
   const args = parseArgs(process.argv.slice(2))
   if (args.help) {
-    console.log('node scripts/news.js [--hours 24] [--limit 10] [--candidates 18] [--out path] [--dry]')
+    console.log('node scripts/news.js [--hours 24] [--limit 10] [--candidates 18] [--dir data/news] [--dry] [--force]')
     return 0
   }
 
   // 幂等：今天已经生成过就跳过。
   // cron 设了两个时间点（主跑 + 兜底），兜底那次必须秒退，不能重复花 LLM 的钱。
   const today = todayBeijing()
+  const issueFile = join(args.dir, `${today}.json`)
   if (!args.force) {
-    const prev = await readPrevious(args.out)
-    if (prev?.date === today) {
-      console.log(`已有 ${today} 的早报（${prev.items?.length ?? 0} 条），跳过。要重跑加 --force。`)
+    const { existsSync } = await import('node:fs')
+    if (existsSync(issueFile)) {
+      console.log(`已有 ${today} 的早报（${issueFile}），跳过。要重跑加 --force。`)
       return 0
     }
   }
@@ -202,20 +215,27 @@ async function main() {
   // 失败保护：宁可显示昨天的，也不要覆盖成空白页。
   // 返回 0 让后续的构建/部署继续跑，页面上仍然是上一期的内容。
   if (news.length < 5) {
-    console.error(`只选出 ${news.length} 条（少于 5），保留上一期，不覆盖 ${args.out}`)
+    console.error(`只选出 ${news.length} 条（少于 5），保留上一期，不写入 ${args.dir}`)
     return 0
   }
 
   if (!args.dry) {
-    await mkdir(dirname(args.out), { recursive: true })
-    await writeFile(args.out, JSON.stringify({
+    await mkdir(args.dir, { recursive: true })
+    await writeFile(issueFile, JSON.stringify({
       generatedAt: new Date().toISOString(),
       date: today,
       stats,
       usage,
       items: news,
     }, null, 2) + '\n', 'utf8')
-    console.log(`\n④ 已写入 ${args.out}`)
+
+    const index = await updateIndex(args.dir, {
+      date: today,
+      count: news.length,
+      top: news[0].title,
+    })
+    console.log(`\n④ 已写入 ${issueFile}`)
+    console.log(`   索引现有 ${index.days.length} 期：${index.days.map(d => d.date).join(', ')}`)
   }
 
   console.log('\n================ 早报预览 ================\n')

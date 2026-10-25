@@ -395,4 +395,80 @@ footer { margin-top: 4px; text-align: center; }
   .news-item { grid-template-columns: 28px 1fr; gap: 2px 8px; }
   .news-idx { font-size: 17px; }
   .news-h { font-size: 14.5px; }
+  .news-past { grid-template-columns: 42px auto 1fr; }
+}
+
+/* 期号小标：跟在标题后面，不抢日期那一行的位置 */
+.news-issue {
+  font-size: 10.5px;
+  line-height: 1;
+  padding: 3px 7px;
+  border-radius: 999px;
+  color: #67e8f9;
+  background: rgba(34, 211, 238, 0.10);
+  border: 1px solid rgba(34, 211, 238, 0.26);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- 往期列表 ---------- */
+
+.news-archive {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(34, 211, 238, 0.14);
+}
+
+.news-archive h3 {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #5f7688;
+}
+
+.news-archive ul { list-style: none; margin: 0; padding: 0; }
+
+.news-past {
+  display: grid;
+  grid-template-columns: 48px auto 1fr;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 6px;
+  margin: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.news-past:hover { background: rgba(34, 211, 238, 0.06); }
+.news-past:active { background: rgba(34, 211, 238, 0.12); }
+
+.news-past-date {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  font-size: 12.5px;
+  color: #67e8f9;
+  font-variant-numeric: tabular-nums;
+}
+
+.news-past-num {
+  font-size: 10.5px;
+  color: #5f7688;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.news-past-top {
+  font-size: 12.5px;
+  color: #8ea0b0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

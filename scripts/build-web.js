@@ -10,7 +10,8 @@
  * 只复制"浏览器安全"的模块 —— 带 node: 依赖的（brief.js / courses-cli.js）绝不进来。
  */
 
-import { copyFile, mkdir, readdir } from 'node:fs/promises'
+import { copyFile, mkdir, readdir, rm, cp } from 'node:fs/promises'
+import { existsSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -21,28 +22,38 @@ const WEB = join(ROOT, 'web')
 /** 浏览器可直接加载的模块（无 node: 内置依赖）。 */
 const LIBRARY = ['courses.js', 'openmeteo.js', 'risks.js', 'render.js']
 
-/** 页面要 fetch 的数据文件。news.json 是可选的：没生成就跳过。 */
+/** 页面要 fetch 的数据文件。 */
 const DATA = [
   ['data/term.json', 'term.json'],
   ['data/brief.config.json', 'brief.config.json'],
   ['course_schedule.csv', 'course_schedule.csv'],
-  ['data/news.json', 'news.json', true],
+]
+
+/** 整个目录复制：往期早报每天多一个文件，没法写死清单。 */
+const DATA_DIRS = [
+  ['data/news', 'news'],
 ]
 
 async function main() {
   await mkdir(join(WEB, 'lib'), { recursive: true })
+  // 先清空 data，避免上一轮构建留下的文件混进产物（比如旧的 news.json）
+  await rm(join(WEB, 'data'), { recursive: true, force: true })
   await mkdir(join(WEB, 'data'), { recursive: true })
 
   for (const name of LIBRARY) {
     await copyFile(join(ROOT, 'scripts', name), join(WEB, 'lib', name))
   }
-  for (const [from, to, optional] of DATA) {
-    try {
-      await copyFile(join(ROOT, from), join(WEB, 'data', to))
-    } catch (e) {
-      if (!optional) throw e
-      console.warn(`跳过可选数据 ${from}（${e.code}）`)
-    }
+  for (const [from, to] of DATA) {
+    await copyFile(join(ROOT, from), join(WEB, 'data', to))
+  }
+  for (const [from, to] of DATA_DIRS) {
+    const src = join(ROOT, from)
+    if (!existsSync(src)) { console.warn(`跳过缺失目录 ${from}`); continue }
+    const dest = join(WEB, 'data', to)
+    await rm(dest, { recursive: true, force: true })   // 先清空，避免删掉的往期残留
+    await cp(src, dest, { recursive: true })
+    const n = (await readdir(dest)).length
+    console.log(`   ${from} → web/data/${to}（${n} 个文件）`)
   }
 
   // 兜底自检：复制进来的模块不应含 node: 依赖，否则浏览器会在加载时报错
