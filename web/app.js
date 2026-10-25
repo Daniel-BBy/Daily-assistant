@@ -67,6 +67,10 @@ async function main() {
     state.weatherError = error.message
   }
   render()
+
+  // 每分钟重算一次：课程「已结束」标记和签到高亮都会随时间变化。
+  // 只重画，不发网络请求。
+  setInterval(() => { if (state.loaded) render() }, 60_000)
 }
 
 /** 当前时间的分钟数（目的地时区），用于给已结束的课打标。 */
@@ -93,8 +97,38 @@ function render() {
 
   renderHeader(date, resolution, week)
   renderCourses(date, resolution, courses, isToday, tz)
+  updateCheckin(courses, isToday, tz)
   renderWeather(isToday)
   renderFooter()
+}
+
+/**
+ * 签到按钮。
+ *
+ * 常驻显示，只在「上课前 20 分钟 ~ 下课前」高亮——签到就发生在这个窗口里。
+ * 其它时间保持普通样式，不制造噪音。
+ * 查看非今天的日期时不参与判断（没有"现在"可言）。
+ */
+const CHECKIN_LEAD_MIN = 20
+
+function minutesToClock(m) {
+  return `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`
+}
+
+function updateCheckin(courses, isToday, tz) {
+  const el = $('checkin')
+  const label = $('checkin-label')
+  if (!el || !label) return
+
+  const now = isToday ? nowMinutes(tz) : null
+  const live = now == null
+    ? null
+    : courses.find(c => now >= c.time.start - CHECKIN_LEAD_MIN && now <= c.time.end)
+
+  el.classList.toggle('is-live', Boolean(live))
+  label.textContent = live
+    ? `现在可签到 · ${minutesToClock(live.time.start)} 开始`
+    : '签到入口'
 }
 
 function renderHeader(date, resolution, week) {

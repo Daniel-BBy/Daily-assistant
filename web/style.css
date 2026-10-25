@@ -398,6 +398,68 @@ footer { margin-top: 4px; text-align: center; }
   .news-past { grid-template-columns: 42px auto 1fr; }
 }
 
+/* ---------- 签到按钮 ----------
+   常驻，但只在「上课前 20 分钟 ~ 下课前」变高亮（.is-live）。
+   其余时间保持成一个安静的次级按钮，不抢课程信息的注意力。 */
+
+.checkin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color .2s, background .2s, color .2s;
+}
+
+.checkin:active { background: var(--bg); }
+
+.checkin-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex: none;
+}
+
+.checkin-label { font-weight: 500; }
+
+.checkin-arrow {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* 上课窗口内：高亮，脉冲点提示"现在该签到" */
+.checkin.is-live {
+  border-color: rgba(34, 211, 238, 0.55);
+  background: rgba(34, 211, 238, 0.10);
+  color: #0e7490;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.08);
+}
+
+.checkin.is-live .checkin-dot {
+  background: #22d3ee;
+  animation: news-pulse 2.2s ease-out infinite;
+}
+
+.checkin.is-live .checkin-arrow { color: #22d3ee; }
+
+@media (prefers-color-scheme: dark) {
+  .checkin.is-live { color: #67e8f9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .checkin.is-live .checkin-dot { animation: none; }
+}
+
 /* 期号小标：跟在标题后面，不抢日期那一行的位置 */
 .news-issue {
   font-size: 10.5px;
