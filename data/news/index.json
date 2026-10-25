@@ -1,7 +1,12 @@
 {
-  "updatedAt": "2026-10-25T09:02:59.790Z",
-  "latest": "2026-10-25",
+  "updatedAt": "2026-10-25T23:27:54.246Z",
+  "latest": "2026-10-26",
   "days": [
+    {
+      "date": "2026-10-26",
+      "count": 10,
+      "top": "OpenAI 与 Anthropic 数月内 LLM 降价最高 80%"
+    },
     {
       "date": "2026-10-25",
       "count": 8,
