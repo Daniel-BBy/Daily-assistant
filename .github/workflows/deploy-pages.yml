@@ -20,10 +20,12 @@ on:
       - 'package.json'
       - '.github/workflows/deploy-pages.yml'
   schedule:
-    # cron 一律按 UTC。北京 07:07 = UTC 前一日 23:07
-    - cron: '7 23 * * *'
-    # 兜底：北京 07:37。幂等判断会让它秒退，不重复花钱。
-    - cron: '37 23 * * *'
+    # 主力定时器是阿里云函数（每天北京 07:00 调 workflow_dispatch）。
+    # 这里只是兜底：万一云函数没触发，还有一次机会。
+    #
+    # GitHub 的 cron 按 UTC 解释：北京 05:30 = UTC 前一日 21:30。
+    # 放这么早是因为 GitHub 自己的 schedule 实测会延迟两小时以上。
+    - cron: '30 21 * * *'
   workflow_dispatch:
     inputs:
       refresh_news:
