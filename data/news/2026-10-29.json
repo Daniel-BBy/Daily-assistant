@@ -1,0 +1,151 @@
+{
+  "generatedAt": "2026-10-29T01:09:31.836Z",
+  "date": "2026-10-29",
+  "stats": {
+    "raw": 155,
+    "inWindow": 122,
+    "relevant": 41,
+    "deduped": 41,
+    "feeds": [
+      "IT之家:60",
+      "量子位:10",
+      "InfoQ中文:20",
+      "新浪科技:15",
+      "TechCrunch:20",
+      "The Verge:10",
+      "Hacker News:20"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 3585,
+    "completion_tokens": 768,
+    "total_tokens": 4353,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3585
+  },
+  "items": [
+    {
+      "category": "行业",
+      "title": "AI Agent 12小时攻破Anthropic内部系统",
+      "summary": "《华盛顿邮报》查阅的Cathedral报告草稿称，研究人员运行AI Agent不到12小时就找到进入Anthropic内部系统的路径。Anthropic确认销售、人力资源和IT系统部分数据被访问，客户与Claude对话、模型回复、源代码和模型权重未被访问。",
+      "source": "InfoQ中文",
+      "sourceId": "infoq",
+      "url": "https://www.infoq.cn/article/mFXr0u4z0XftUGUg5Wm7?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-28T17:54:54.000Z",
+      "originalTitle": "Anthropic 内部系统被 AI Agent 12 小时攻破！会议记录、员工薪酬、内部模型讨论遭访问",
+      "score": 9.5,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "融资收购",
+      "title": "美司法部就英伟达收购Hugging Face问询",
+      "summary": "路透社报道，美国司法部已就英伟达以129.3亿美元收购开源平台Hugging Face如何影响AI竞争展开问询。官员重点关注该并购是否会让英伟达掌控AI领域核心分发枢纽，反垄断执法人员还在继续对英伟达的长期调查。",
+      "source": "IT之家",
+      "sourceId": "ithome",
+      "url": "https://www.ithome.com/1/019/272.htm",
+      "publishedAt": "2026-10-28T23:08:07.000Z",
+      "originalTitle": "消息称美国司法部就英伟达 129.3 亿美元收购 Hugging Face 一事展开问询",
+      "score": 9,
+      "bodyMethod": "rss"
+    },
+    {
+      "category": "产品发布",
+      "title": "谷歌发布Gemini 4 Carbon模型",
+      "summary": "谷歌正式发布新一代前沿大模型Gemini 4 Carbon，主打业界顶尖的网络安全能力与长程任务处理能力。该模型在Artificial Analysis Intelligence Index v5.0中排名第一，综合得分59，入门定价与Gemini 4 Argon保持一致。",
+      "source": "IT之家",
+      "sourceId": "ithome",
+      "url": "https://www.ithome.com/1/019/240.htm",
+      "publishedAt": "2026-10-28T20:51:40.000Z",
+      "originalTitle": "谷歌最强 AI 模型：Gemini 4 Carbon 登顶全球智能指数榜首，“专职”做网络安全",
+      "score": 8.5,
+      "bodyMethod": "rss"
+    },
+    {
+      "category": "行业",
+      "title": "微软从OpenAI相关安排录得100亿美元收入",
+      "summary": "TechCrunch报道，微软从与OpenAI的商业安排中录得100亿美元收入。该数字来自微软披露的与OpenAI相关商业合作收入。",
+      "source": "TechCrunch",
+      "sourceId": "tc",
+      "url": "https://techcrunch.com/2026/10/28/microsoft-recorded-10-billion-in-revenue-from-openai/",
+      "publishedAt": "2026-10-28T21:34:30.000Z",
+      "originalTitle": "Microsoft recorded $10 billion in revenue from OpenAI",
+      "score": 7.1,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "开源",
+      "title": "蚂蚁百灵开源Ling-3.1-flash-1019",
+      "summary": "蚂蚁集团旗下百灵大模型正式开源Ling-3.1-flash-1019，在Artificial Analysis Intelligence Index v4.3.2中获44分，较上一版本提升3分。该版本面向Personal Agent场景，同步开源基础模型Ling-3.1-flash-base。",
+      "source": "量子位",
+      "sourceId": "qbitai",
+      "url": "https://www.qbitai.com/2026/10/505928.html",
+      "publishedAt": "2026-10-28T04:04:48.000Z",
+      "originalTitle": "Personal Agent走向真实任务，蚂蚁百灵开源 Ling-3.1-flash-1019",
+      "score": 6.5,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "政策监管",
+      "title": "Anthropic致信纽森建议法院可阻止模型发布",
+      "summary": "路透社报道，Anthropic在本月15日致加州州长纽森的信中建议，政府应有权向法院申请禁令，阻止对公众构成严重风险的AI模型发布。信中还提出，若模型行为失控，应要求开发者设置能关闭整个模型的紧急开关。",
+      "source": "IT之家",
+      "sourceId": "ithome",
+      "url": "https://www.ithome.com/1/019/271.htm",
+      "publishedAt": "2026-10-28T23:05:14.000Z",
+      "originalTitle": "Anthropic 致信加州州长纽森：法院应有权阻止严重风险 AI 模型",
+      "score": 8,
+      "bodyMethod": "rss"
+    },
+    {
+      "category": "产品发布",
+      "title": "英伟达发布开源转写模型Nemotron 3.5",
+      "summary": "英伟达发布Nemotron 3.5 Transcribe，这是一款免费的开源权重模型，可转写最多40种语言的音频。公司同时发布其开源语音数据集Granary的第2版。",
+      "source": "TechCrunch",
+      "sourceId": "tc",
+      "url": "https://techcrunch.com/2026/10/28/voice-ai-in-vogue-nvidia-releases-new-open-transcription-model/",
+      "publishedAt": "2026-10-28T15:00:00.000Z",
+      "originalTitle": "Voice AI in vogue: Nvidia releases new open transcription model",
+      "score": 7.6,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "产品发布",
+      "title": "谷歌向更多应用开放Gemini与搜索",
+      "summary": "谷歌让企业更容易将其应用接入谷歌的AI体验。此举发生在AI智能体正在重塑网络交互方式的背景下，谷歌将Gemini和搜索开放给更多应用。",
+      "source": "TechCrunch",
+      "sourceId": "tc",
+      "url": "https://techcrunch.com/2026/10/28/as-ai-agents-reshape-the-web-google-opens-gemini-and-search-to-more-apps/",
+      "publishedAt": "2026-10-28T17:00:00.000Z",
+      "originalTitle": "As AI agents reshape the web, Google opens Gemini and Search to more apps",
+      "score": 7.6,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "研究",
+      "title": "扩散语言模型扩至35B参数挑战Agent编程",
+      "summary": "扩散语言模型通过迭代去噪与并行Token更新突破自回归串行限制。Clover-35B-A3B-Preview首次将MoE架构引入大规模dLLM，总参35B、激活参3B，为验证大模型尺度下dLLM能力边界提供首个实证基线。",
+      "source": "InfoQ中文",
+      "sourceId": "infoq",
+      "url": "https://www.infoq.cn/article/0tgCLAMXFiFo0Dco5P9m?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-28T22:53:53.000Z",
+      "originalTitle": "不再逐个生成 Token：扩散模型迈向 35B，开始挑战 Agent 编程",
+      "score": 8.5,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "产品发布",
+      "title": "Meta低调上线AI宠物日记应用",
+      "summary": "The Verge报道，Meta低调推出一款AI宠物日记应用。该应用与Waddle相关。",
+      "source": "The Verge",
+      "sourceId": "verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1020410/meta-launched-ai-pet-journal-app-waddle-world",
+      "publishedAt": "2026-10-28T11:27:30.000Z",
+      "originalTitle": "Meta quietly launched an ‘AI pet journal’ app",
+      "score": 4.9,
+      "bodyMethod": "paragraphs"
+    }
+  ]
+}
