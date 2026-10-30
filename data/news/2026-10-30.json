@@ -1,0 +1,151 @@
+{
+  "generatedAt": "2026-10-30T01:16:40.330Z",
+  "date": "2026-10-30",
+  "stats": {
+    "raw": 155,
+    "inWindow": 118,
+    "relevant": 43,
+    "deduped": 43,
+    "feeds": [
+      "IT之家:60",
+      "量子位:10",
+      "InfoQ中文:20",
+      "新浪科技:15",
+      "TechCrunch:20",
+      "The Verge:10",
+      "Hacker News:20"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 3721,
+    "completion_tokens": 827,
+    "total_tokens": 4548,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3721
+  },
+  "items": [
+    {
+      "category": "开源",
+      "title": "Mistral AI 开放万亿参数模型权重",
+      "summary": "Mistral AI 正式开放 Mistral Large 4 模型权重，该模型拥有 1 万亿总参数、490 亿激活参数，是原生多模态模型。它在编程智能体指数得分 48%，与 GLM-5.3 基本持平，但每个任务消耗的 Token 减少 47%。",
+      "source": "IT之家",
+      "sourceId": "ithome",
+      "url": "https://www.ithome.com/1/019/865.htm",
+      "publishedAt": "2026-10-30T01:09:09.000Z",
+      "originalTitle": "Mistral AI 开放 Large 4 模型权重：1T 参数，编程智能体更省 Token",
+      "score": 10.5,
+      "bodyMethod": "rss"
+    },
+    {
+      "category": "产品发布",
+      "title": "谷歌发布 Gemini 4 Carbon 模型",
+      "summary": "谷歌推出新一代前沿模型 Gemini 4 Carbon，在 Artificial Analysis v5.0 智能指数中以 59 分登顶，并在漏洞发现、利用与修复三项网络安全任务中领先。其核心突破在于长程智能体执行能力，支持多日连续运行解决复杂工程问题。",
+      "source": "InfoQ中文",
+      "sourceId": "infoq",
+      "url": "https://www.infoq.cn/article/dXwHCW7kjGX1kjPqtla9?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-29T20:13:07.000Z",
+      "originalTitle": "谷歌赢了 AI 排行榜，却没赢下华尔街：Gemini 4 Carbon 登顶背后的昂贵代价",
+      "score": 8.5,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "行业",
+      "title": "英伟达商讨为 Nscale 数据中心担保",
+      "summary": "知情人士透露，英伟达正商讨为 Nscale 一处数据中心项目提供信用担保，该设施计划交由 Anthropic 使用。这笔信用支持将为西弗吉尼亚州人工智能数据中心园区的电力与建设费用提供兜底保障，园区内会部署英伟达芯片。",
+      "source": "IT之家",
+      "sourceId": "ithome",
+      "url": "https://www.ithome.com/1/019/850.htm",
+      "publishedAt": "2026-10-30T00:42:12.000Z",
+      "originalTitle": "消息称英伟达商讨为 Nscale 数据中心提供信用担保，项目供 Anthropic 使用",
+      "score": 8.5,
+      "bodyMethod": "rss"
+    },
+    {
+      "category": "产品发布",
+      "title": "OpenAI 上调 ChatGPT Pro 用量额度",
+      "summary": "在用户强烈反对后，OpenAI 宣布立即上调 ChatGPT Pro 及 Business Premium 订阅中 Work 与 Codex 的用量额度，Pro 100、Pro 200 以及 Pro 500 的额度直接翻倍。OpenAI 明确表示不会降低上述订阅的用量限制。",
+      "source": "IT之家",
+      "sourceId": "ithome",
+      "url": "https://www.ithome.com/1/019/848.htm",
+      "publishedAt": "2026-10-30T00:34:52.000Z",
+      "originalTitle": "OpenAI“服软”：ChatGPT Pro 订阅用量翻倍，取消 Pro 200 砍半计划",
+      "score": 8.5,
+      "bodyMethod": "rss"
+    },
+    {
+      "category": "研究",
+      "title": "扩散模型 Clover 用于 Agent 任务",
+      "summary": "Clover 是采用扩散模型的 Agent，可写代码、生成网页、调用工具。在网页 Agent 评测 WindTunnel 的 49 个任务中，其中位执行时间为 1.52 秒，Jev 与 Mercury 2.5 组合为 3.21 秒。",
+      "source": "量子位",
+      "sourceId": "qbitai",
+      "url": "https://www.qbitai.com/2026/10/505934.html",
+      "publishedAt": "2026-10-29T02:18:28.000Z",
+      "originalTitle": "刚刚，扩散模型杀进Agent主场！350亿参数，速度比Jev快一倍",
+      "score": 10,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "产品发布",
+      "title": "Kimi 接入谷歌 Gmail 等三项服务",
+      "summary": "月之暗面宣布 Kimi 已接入谷歌 Gmail、Google Drive 和日历，用户可通过 Plugins 页面启用。用户可总结 Gmail 邮件对话、查找 Google Drive 文件，并利用 Google 日历规划每日行程，所有操作均通过 OAuth 授权。",
+      "source": "IT之家",
+      "sourceId": "ithome",
+      "url": "https://www.ithome.com/1/019/782.htm",
+      "publishedAt": "2026-10-29T14:27:39.000Z",
+      "originalTitle": "月之暗面 Kimi 接入谷歌 Gmail、云端硬盘和日历",
+      "score": 7,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "融资收购",
+      "title": "Wabi 最新融资后估值 12.5 亿美元",
+      "summary": "构建迷你应用的 AI 智能体 Wabi 在最新一轮融资后估值达到 12.5 亿美元。报道称，打造获胜 AI 助手的竞赛正在进行，投资者正在分散布局。",
+      "source": "TechCrunch",
+      "sourceId": "tc",
+      "url": "https://techcrunch.com/2026/10/29/wabi-the-ai-agent-that-builds-mini-apps-now-valued-at-1-25b-after-latest-round/",
+      "publishedAt": "2026-10-29T14:35:26.000Z",
+      "originalTitle": "Wabi, the AI agent that builds mini apps, now valued at $1.25B after latest round",
+      "score": 8.1,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "具身智能",
+      "title": "启元机器人接入腾讯 WorkBuddy",
+      "summary": "启元机器人宣布接入腾讯 WorkBuddy，实现自然语言驱动的物理世界任务执行。WorkBuddy 承担意图理解与任务拆解，启元负责环境感知与动作执行，形成“感-思-随-行”闭环，其超 10 万 Skill 能力可复用于机器人应用开发。",
+      "source": "InfoQ中文",
+      "sourceId": "infoq",
+      "url": "https://www.infoq.cn/article/fHXiS2bsEFHDXdwVK6KP?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-29T20:22:05.000Z",
+      "originalTitle": "启元 CEO 田华：启元机器人接入WorkBuddy，不仅看见你的世界，还能走得到你身边",
+      "score": 6,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "具身智能",
+      "title": "小雨智造共建焊接检测联合实验室",
+      "summary": "国家钢结构质量检验检测中心与北京小雨智造共建的“工业具身智能焊接与检测技术联合实验室”正式揭牌成立。小雨智造 CEO 乔忠良表示，具身智能发展迅速，但越是在这样的时刻，越需要守住质量这条底线。",
+      "source": "量子位",
+      "sourceId": "qbitai",
+      "url": "https://www.qbitai.com/2026/10/506273.html",
+      "publishedAt": "2026-10-29T02:51:45.000Z",
+      "originalTitle": "小雨智造与国家钢结构质检中心共建实验室，乔忠良：具身智能新质生产力已成事实",
+      "score": 5.5,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "产品发布",
+      "title": "Gemini 聊天中可直接生成编辑文档",
+      "summary": "用户现在可以在 Gemini 聊天中直接生成和编辑 Google Docs 文件。该功能属于谷歌 Gemini 的 AI 新闻动态之一。",
+      "source": "The Verge",
+      "sourceId": "verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1022519/google-gemini-file-editing-documents-pdfs",
+      "publishedAt": "2026-10-29T18:45:31.000Z",
+      "originalTitle": "You can generate and edit Google Docs files directly in Gemini chats now",
+      "score": 5.4,
+      "bodyMethod": "paragraphs"
+    }
+  ]
+}
