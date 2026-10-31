@@ -1,0 +1,151 @@
+{
+  "generatedAt": "2026-10-31T00:57:59.201Z",
+  "date": "2026-10-31",
+  "stats": {
+    "raw": 155,
+    "inWindow": 122,
+    "relevant": 40,
+    "deduped": 39,
+    "feeds": [
+      "IT之家:60",
+      "量子位:10",
+      "InfoQ中文:20",
+      "新浪科技:15",
+      "TechCrunch:20",
+      "The Verge:10",
+      "Hacker News:20"
+    ]
+  },
+  "usage": {
+    "prompt_tokens": 3628,
+    "completion_tokens": 751,
+    "total_tokens": 4379,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3628
+  },
+  "items": [
+    {
+      "category": "融资收购",
+      "title": "快手可灵AI完成约198亿元增资交割",
+      "summary": "快手科技公告，旗下可灵AI独立融资完成交割，投资者实际支付增资款总额约198.0184亿元。本轮原定融资上限204.47亿元，因两家投资者未按期付款，终止合计约6.45亿元增资。",
+      "source": "IT之家",
+      "sourceId": "ithome",
+      "url": "https://www.ithome.com/1/020/406.htm",
+      "publishedAt": "2026-10-31T00:16:45.000Z",
+      "originalTitle": "快手旗下可灵 AI 完成约 198 亿元增资",
+      "score": 8.5,
+      "bodyMethod": "rss"
+    },
+    {
+      "category": "研究",
+      "title": "谷歌在轨TPU首次给出AI响应并生成俳句",
+      "summary": "谷歌宣布达成“Hello World”里程碑，在轨运行的数据中心级TPU首次给出AI响应。地面工程师下发提示词，预装卫星的DeepMind模型Gemma 4创作了一首关于身处太空的俳句。",
+      "source": "IT之家",
+      "sourceId": "ithome",
+      "url": "https://www.ithome.com/1/020/402.htm",
+      "publishedAt": "2026-10-30T23:51:47.000Z",
+      "originalTitle": "谷歌宣布达成“Hello World”里程碑：在轨运行的数据中心级 TPU 首次给出 AI 响应，生成了一首俳句",
+      "score": 8.5,
+      "bodyMethod": "rss"
+    },
+    {
+      "category": "产品发布",
+      "title": "Claude新模型Fable与Opus曝光进入早期测试",
+      "summary": "报道称Claude新模型已进入早期测试阶段，Azure模型目录曾短暂出现claude-fable-5-5条目后被删除。有开发者在基准测试平台发现代号Obsidian 3的模型，跑分略高于现在的Opus 5.5。",
+      "source": "量子位",
+      "sourceId": "qbitai",
+      "url": "https://www.qbitai.com/2026/10/506674.html",
+      "publishedAt": "2026-10-30T05:50:44.000Z",
+      "originalTitle": "Claude新模型曝光：新Fable，新Opus…",
+      "score": 5.5,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "产品发布",
+      "title": "Anthropic将Claude Max 20x更名为Ultra",
+      "summary": "Anthropic调整Claude个人付费套餐命名，原Max 20x更名为Ultra，价格仍为每月200美元，并对通过验证的账户取消5小时会话用量限制，仍受每周限额约束。原Max 5x简化为Claude Max，每月100美元。",
+      "source": "IT之家",
+      "sourceId": "ithome",
+      "url": "https://www.ithome.com/1/020/398.htm",
+      "publishedAt": "2026-10-30T23:26:41.000Z",
+      "originalTitle": "Anthropic Claude Max 20x 订阅更名 Ultra，已验证账户无五小时限制",
+      "score": 8.5,
+      "bodyMethod": "rss"
+    },
+    {
+      "category": "开源",
+      "title": "英伟达团队开源基于MiniMax H3的视频增强方案",
+      "summary": "英伟达与麻省理工学院团队在Hugging Face发布视频增强项目Open-H3-Regenerate-2K的模型权重，配套推理代码已在NVlabs/Sana仓库开放。该方案基于MiniMax H3，支持2K输出，最高可实现原生4K重生成。",
+      "source": "量子位",
+      "sourceId": "qbitai",
+      "url": "https://www.qbitai.com/2026/10/506743.html",
+      "publishedAt": "2026-10-30T07:31:11.000Z",
+      "originalTitle": "英伟达团队基于 MiniMax H3 开源视频增强方案，最高支持 4K 重生成",
+      "score": 8.5,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "具身智能",
+      "title": "清华联合无问芯穹、智元提出群体经验学习范式",
+      "summary": "清华大学、无问芯穹与智元联合提出群体经验学习新范式，并在96台真实机器人组成的集群中完成规模化验证。机器人可从同伴过去的经验中寻找解决方法，不再只依靠人类示范学习。",
+      "source": "量子位",
+      "sourceId": "qbitai",
+      "url": "https://www.qbitai.com/2026/10/506662.html",
+      "publishedAt": "2026-10-30T03:48:04.000Z",
+      "originalTitle": "从学习人类到学习机器人同伴，清华大学联合无问芯穹、智元提出具身智能规模化落地新路径",
+      "score": 7.5,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "产品发布",
+      "title": "Chainguard推出面向AI编码智能体的安全工作区",
+      "summary": "软件供应链安全公司Chainguard发布两款测试版产品Workspaces和Checks，用于运行和测试开发者与AI智能体编写的代码。Workspaces提供基于加固型微型虚拟机的远程开发环境，Checks将持续集成能力融入开发流程。",
+      "source": "InfoQ中文",
+      "sourceId": "infoq",
+      "url": "https://www.infoq.cn/article/UNli8x0wc8XUNjI5ETya?utm_source=rss&utm_medium=article",
+      "publishedAt": "2026-10-30T09:23:00.000Z",
+      "originalTitle": "Chainguard 推出面向 AI 编码智能体的安全工作区与安全校验能力",
+      "score": 7,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "政策监管",
+      "title": "多家AI巨头支持新的数据抓取退出机制",
+      "summary": "报道称AI领域多家知名公司支持一种新的退出数据抓取方式。候选正文仅提供标题与页面导航信息，未披露具体机制与参与方细节。",
+      "source": "The Verge",
+      "sourceId": "verge",
+      "url": "https://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out",
+      "publishedAt": "2026-10-30T20:26:10.000Z",
+      "originalTitle": "The biggest names in AI are backing a new way to opt out of scraping",
+      "score": 6.4,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "行业",
+      "title": "星巴克拟用AI在得来速展示个性化数字菜单",
+      "summary": "报道称星巴克希望利用AI在得来速场景向顾客展示“个性化数字菜单”。候选正文仅提供标题与页面导航信息，未披露更多实施细节。",
+      "source": "The Verge",
+      "sourceId": "verge",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1023440/starbucks-ai-personalized-menu-drive-thru",
+      "publishedAt": "2026-10-30T17:38:04.000Z",
+      "originalTitle": "Starbucks wants to use AI to show you a ‘personalized digital menu’ at the drive-thru",
+      "score": 5.4,
+      "bodyMethod": "paragraphs"
+    },
+    {
+      "category": "行业",
+      "title": "隐私导向AI助手Ollie宣布关停",
+      "summary": "主打隐私保护的AI助手初创公司Ollie宣布将关停。该公司此前的目标是提供尊重用户隐私的AI助手服务。",
+      "source": "TechCrunch",
+      "sourceId": "tc",
+      "url": "https://techcrunch.com/2026/10/30/ollie-a-privacy-focused-ai-assistant-is-shutting-down/",
+      "publishedAt": "2026-10-30T22:56:13.000Z",
+      "originalTitle": "Ollie, a privacy-focused AI assistant, is shutting down",
+      "score": 6.6,
+      "bodyMethod": "paragraphs"
+    }
+  ]
+}
